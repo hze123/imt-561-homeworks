@@ -50,10 +50,10 @@
           </div>
 
           <div class="welcome-copy">
-            <p><strong>[Your name]</strong> ([optional pronouns])</p>
-            <p>I am a master’s student in [program], focused on [interest area or domain].</p>
-            <p>This quarter I want to get better at [analysis, storytelling, interaction design, etc.].</p>
-            <p>One dataset or topic I am excited to visualize is [topic], because [short reason].</p>
+            <p><strong>Zhien He</strong> she/her/hers</p>
+            <p>I am a master’s student in MSIM program, focused on BI and UX.</p>
+            <p>This quarter I want to get better at analysis and user experience design.</p>
+            <p>One dataset or topic I am excited to visualize is p5JS, because I can interact with AI and design.</p>
           </div>
         </div>
       </div>
@@ -65,69 +65,170 @@
       <div id="sketch-drawing-sk2" class="sketch-evolution">
         <div class="welcome-template hwk-template" aria-labelledby="sk2-notes-title">
           <h3 id="sk2-notes-title">Documenting iterative process</h3>
-          <p class="small-note">Replace placeholders with your own notes and images.</p>
+          <p class="small-note">
+            by Zhien He - 
+            <a href="https://github.com/hze123/imt-561-homeworks/blob/main/sketches/sketch2-hw4-1.js" target="_blank" rel="noopener noreferrer">source code</a>
+          </p>
+
           <p>
-            Context of use: Explain where your clocks/timers would be used, by whom, and what problem they help solve. [add 2-3 sentences]
+            <strong>Context:</strong> This clock is designed for people who enjoy tea or people who are not familiar with different tea brewing times. It works as a visual tea timer that helps users choose a tea type and understand how long it should brew. The clock could be used on a kitchen tablet, phone screen, or small smart kitchen display while preparing tea.
           </p>
 
           <article class="clock-template">
-            <h4>Final Clock 1</h4>
-            <p class="small-note">Sketch iteration documentation (paper/hand-drawn photos)</p>
+            <h4>Final Clock 1: Interactive Tea Brewing Clock</h4>
+
+            <p><strong>Design process:</strong></p>
+             <ol>
+              <li>
+                <strong>Tea cup as timer:</strong> I used the tea cup itself as the main timer. After the user clicks the
+            cup, the liquid level rises to show brewing progress.
+              </li>
+
+              <li>
+               <strong>Color-coded tea types:</strong> Different tea categories use different colors. Green tea is green,
+            red / black tea is reddish brown, oolong is amber, and herbal tea is pink.
+              </li>
+
+              <li>
+                 <strong>Different brewing durations:</strong> Each tea has its own brewing time, so the clock works as a
+           simple guide for people who are not familiar with tea brewing.
+              </li>
+
+              <li>
+                 <strong>Countdown on the cup:</strong> I placed the remaining time directly on the cup so the design stays
+            easy to read while keeping the tea visual as the main focus.
+              </li>
+
+              <li>
+                <strong>Motion and feedback:</strong> Steam, bubbles, and the progress ring make the clock feel more alive.
+            These details show that time is actively passing.
+              </li>
+            </ol>
+
+            <p>
+              <strong>Information visualization considerations:</strong> I used liquid height to encode timer progress,
+          color to encode tea category, motion to encode seconds, and text hierarchy to make the most important
+          information readable. The large countdown gives precise information, while the liquid level and progress ring
+          provide a quick visual summary.
+            </p>
+
+            <p>
+              <strong>Self-reflection / future work:</strong> In the future, I would like to make the tea cup and steam look
+          more realistic. I would also add a stronger ready notification and allow users to customize brewing time based
+          on how strong they like their tea.
+            </p>
+
+            <h4><strong>Sketch evolution</strong></h4>
             <div class="iteration-grid">
               <figure class="iteration-item">
-                <!-- <img src="images/clock1-sketch1.jpg" alt="Clock 1 sketch iteration 1" /> -->
-                <div class="image-placeholder">Clock 1 sketch photo 1</div>
+                <img src="images/ZhienHe/sketch2tea.PNG" alt="Tea brewing clock initial sketch" />
+                <figcaption><strong>Step 1 — Initial layout</strong></figcaption>
               </figure>
               <figure class="iteration-item">
-                <!-- <img src="images/clock1-sketch2.jpg" alt="Clock 1 sketch iteration 2" /> -->
-                <div class="image-placeholder">Clock 1 sketch photo 2</div>
+                <img src="images/ZhienHe/sketch1tea.PNG" alt="Tea brewing clock refined sketch" />
+                <figcaption><strong>Step 2 — Refined design</strong></figcaption>
               </figure>
             </div>
-            <p>
-              Design process: In 1–2 paragraphs (or bullet points), explain how this clock evolved from sketches to final
-              form. Name the information visualization principles you applied (readability, hierarchy, color, layout,
-              interaction, accessibility). [mention 2-3 design decisions and why]
-            </p>
-            <p>
-              Self-reflection / future work: What would you improve next, and why? [add two improvements you'd make and explain why]
-            </p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Homework 4: Sketch 1 -->
+    <!-- Homework 4: Clock 2 -->
     <section id="tab3" class="tab-content" role="tabpanel">
       <div id="sketch-container-sk3" class="sketch-container"></div>
+
       <div id="sketch-drawing-sk3" class="sketch-evolution">
         <div class="welcome-template hwk-template" aria-labelledby="sk3-notes-title">
+
           <h3 id="sk3-notes-title">Documenting iterative process</h3>
-          <p class="small-note">Replace placeholders with your own notes and images.</p>
+
+          <p class="small-note">
+            by Zhien He —
+            <a href="https://github.com/hze123/imt-561-homeworks/blob/main/sketches/sketch3-hw4-2.js" target="_blank" rel="noopener noreferrer">source code</a>
+          </p>
+
           <p>
-            Context of use: Explain where your clocks/timers would be used, by whom, and what problem they help solve. [add 2-3 sentences]
+            <strong>Context:</strong> This clock is designed for coffee lovers and people who are learning how to steam
+            milk for different coffee drinks. It works as a visual milk-steaming timer for a coffee-making or kitchen
+            setting. The clock helps users understand how different coffee styles and milk types affect steaming time,
+            foam amount, and visual texture.
           </p>
 
           <article class="clock-template">
-            <h4>Final Clock 2</h4>
-            <p class="small-note">Sketch iteration documentation (paper/hand-drawn photos)</p>
-            <div class="iteration-grid">
-              <figure class="iteration-item">
-                <!-- <img src="images/clock2-sketch1.jpg" alt="Clock 2 sketch iteration 1" /> -->
-                <div class="image-placeholder">Clock 2 sketch photo 1</div>
-              </figure>
-              <figure class="iteration-item">
-                <!-- <img src="images/clock2-sketch2.jpg" alt="Clock 2 sketch iteration 2" /> -->
-                <div class="image-placeholder">Clock 2 sketch photo 2</div>
-              </figure>
-            </div>
+            <h4>Final Clock 2: Coffee Milk Steaming Clock</h4>
+
+            <p><strong>Design process:</strong></p>
+
+            <ol>
+              <li>
+                <strong>Cup as timer:</strong> I used the coffee cup itself as the main timer. After the user clicks the
+                cup, the milk level rises to show steaming progress.
+              </li>
+
+              <li>
+                <strong>Coffee style as foam pattern:</strong> Different coffee drinks have different foam styles. Latte,
+                cappuccino, and flat white each use different foam amounts and surface patterns to show how milk texture
+                changes by drink type.
+              </li>
+
+              <li>
+                <strong>Milk type as color change:</strong> Whole milk, oat milk, and almond milk slightly change the color
+                of the drink. This makes the milk selection visible without adding too much clutter.
+              </li>
+
+              <li>
+                <strong>Different steaming durations:</strong> Each coffee style has a different timer. This helps beginners
+                understand that different drinks may need different steaming times and textures.
+              </li>
+
+              <li>
+                <strong>Readable countdown:</strong> The remaining time appears directly on the cup, so the clock stays
+                functional while still using the drink as the main visual object.
+              </li>
+
+              <li>
+                <strong>Motion and feedback:</strong> Steam, bubbles, foam movement, and the progress ring make the clock
+                feel active. These animated details show that time is passing and that the milk is being steamed.
+              </li>
+            </ol>
+
             <p>
-              Design process: In 1–2 paragraphs (or bullet points), explain your iterations and final decisions. Make
-              explicit which visualization considerations shaped the result. [mention 2-3 design decisions and why]
+              <strong>Information visualization considerations:</strong> I used liquid height to encode timer progress,
+              foam pattern to encode coffee style, color variation to encode milk type, and motion to encode seconds. The
+              countdown provides precise time information, while the rising milk level and progress ring provide a quick
+              visual summary. I also separated the status panel, cup, and buttons so the page is easier to read.
             </p>
+
             <p>
-              Self-reflection / future work: What would you improve next, and why? [add two improvements you'd make and explain why]
+              <strong>Self-reflection / future work:</strong> In the future, I would like to make the foam patterns more
+              realistic and add a pouring interaction after the timer finishes. I would also add a clearer ready alert,
+              such as a sound or stronger visual signal, so users know when the milk is ready to pour.
             </p>
           </article>
+
+          <h4><strong>Sketch evolution</strong></h4>
+
+          <div class="iteration-grid">
+            <figure class="iteration-item">
+              <img src="images/ZhienHe/coffee1.PNG" alt="Coffee milk steaming clock initial sketch" />
+              <figcaption>
+                <strong>Step 1 — Initial sketch:</strong> I started with a coffee milk steaming idea using different foam
+                styles, including latte foam, cappuccino foam, and flat white foam. This helped me connect time with the
+                visible change of milk texture.
+              </figcaption>
+            </figure>
+
+            <figure class="iteration-item">
+              <img src="images/ZhienHe/coffee2.PNG" alt="Coffee milk steaming clock refined sketch" />
+              <figcaption>
+                <strong>Step 2 — Refined design:</strong> I added milk type choices because whole milk, oat milk, and
+                almond milk can slightly change the drink color and texture. In the coded version, the cup becomes the main
+                timer, the milk level rises as time passes, and the foam pattern changes by coffee style.
+              </figcaption>
+            </figure>
+          </div>
+
         </div>
       </div>
     </section>
