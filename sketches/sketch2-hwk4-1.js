@@ -21,10 +21,10 @@ registerSketch('sk2', function (p) {
   // Cup position and size
   const cup = {
     x: 400,
-    y: 405,
+    y: 470,
     topW: 270,
-    bottomW: 170,
-    h: 290
+    bottomW: 190,
+    h: 320
   };
 
   p.setup = function () {
@@ -190,33 +190,31 @@ registerSketch('sk2', function (p) {
   // ------------------------------------------------------------
 
   function drawKitchenBackground(currentHour, currentMinute) {
-    // hour() and minute() change the mood of the background.
-    // This connects the brewing timer to the real time of day.
-    const dayProgress = (currentHour * 60 + currentMinute) / 1440;
+  // hour() and minute() change the mood of the background.
+  // This connects the brewing timer to the real time of day.
+  const dayProgress = (currentHour * 60 + currentMinute) / 1440;
 
-    const morning = p.color(255, 241, 211);
-    const afternoon = p.color(240, 231, 205);
-    const evening = p.color(215, 226, 238);
+  const morning = p.color(255, 241, 211);
+  const afternoon = p.color(240, 231, 205);
+  const evening = p.color(215, 226, 238);
 
-    let bg;
+  let bg;
 
-    if (dayProgress < 0.5) {
-      bg = p.lerpColor(morning, afternoon, dayProgress * 2);
-    } else {
-      bg = p.lerpColor(afternoon, evening, (dayProgress - 0.5) * 2);
-    }
-
-    p.background(bg);
-
-    // Table surface
-    p.noStroke();
-    p.fill(220, 198, 165, 150);
-    p.rect(0, 595, p.width, 205);
-
-    // Soft circle behind the cup
-    p.fill(255, 255, 255, 65);
-    p.ellipse(400, 410, 460, 460);
+  if (dayProgress < 0.5) {
+    bg = p.lerpColor(morning, afternoon, dayProgress * 2);
+  } else {
+    bg = p.lerpColor(afternoon, evening, (dayProgress - 0.5) * 2);
   }
+
+  p.background(bg);
+
+  // Table surface moved lower so it does not cut through the cup.
+  p.noStroke();
+  p.fill(220, 198, 165, 150);
+  p.rect(0, 690, p.width, 110);
+
+  // Removed the pale background circle behind the cup.
+}
 
   function drawTitle(currentHour, currentMinute, currentSecond) {
     p.noStroke();
@@ -247,49 +245,97 @@ registerSketch('sk2', function (p) {
     );
   }
 
-  function drawTeaStatus(selectedTea, elapsedSeconds, brewProgress) {
-    const timeLeft = selectedTea.brewSeconds - elapsedSeconds;
-
-    let status = 'Waiting to start';
-
-    if (isBrewing) {
-      if (brewProgress < 0.05) {
-        status = 'Just started';
-      } else if (brewProgress < 0.5) {
-        status = 'Light flavor';
-      } else if (brewProgress < 1) {
-        status = 'Almost ready';
-      } else if (elapsedSeconds < selectedTea.brewSeconds + 60) {
-        status = 'Ready to drink';
-      } else {
-        status = 'Over-brewed';
-      }
-    }
-
-    p.noStroke();
-    p.fill(255, 255, 255, 150);
-    p.rect(115, 130, 570, 88, 18);
-
-    p.fill(45, 40, 35);
-    p.textAlign(p.LEFT, p.CENTER);
-    p.textSize(16);
-    p.text('Selected tea: ' + selectedTea.name, 140, 155);
-
-    p.textSize(14);
-    p.text('Recommended brew time: ' + formatTime(selectedTea.brewSeconds), 140, 183);
-
-    let timerText;
-
-    if (!isBrewing) {
-      timerText = 'Click the tea cup to start';
-    } else if (timeLeft > 0) {
-      timerText = 'Time left: ' + formatTime(timeLeft);
-    } else {
-      timerText = 'Extra time: +' + formatTime(Math.abs(timeLeft));
-    }
-
-    p.text(timerText + '   |   Status: ' + status, 140, 205);
+  function getStrengthLabel(brewProgress, elapsedSeconds, selectedTea) {
+  if (elapsedSeconds > selectedTea.brewSeconds + 60) {
+    return 'Over-brewed';
+  } else if (brewProgress < 0.2) {
+    return 'Very light';
+  } else if (brewProgress < 0.45) {
+    return 'Light';
+  } else if (brewProgress < 0.75) {
+    return 'Medium';
+  } else if (brewProgress < 1) {
+    return 'Strong';
+  } else {
+    return 'Ready';
   }
+}
+
+  function drawTeaStatus(selectedTea, elapsedSeconds, brewProgress) {
+  const timeLeft = selectedTea.brewSeconds - elapsedSeconds;
+  const strength = getStrengthLabel(brewProgress, elapsedSeconds, selectedTea);
+
+  let status = 'Waiting to start';
+
+  if (isBrewing) {
+    if (brewProgress < 0.05) {
+      status = 'Just started';
+    } else if (brewProgress < 0.5) {
+      status = 'Brewing';
+    } else if (brewProgress < 1) {
+      status = 'Almost ready';
+    } else if (elapsedSeconds < selectedTea.brewSeconds + 60) {
+      status = 'Ready to drink';
+    } else {
+      status = 'Over-brewed';
+    }
+  }
+
+  // Wider and taller card so all information stays inside.
+  const cardX = 85;
+  const cardY = 125;
+  const cardW = 630;
+  const cardH = 145;
+
+  p.noStroke();
+  p.fill(255, 255, 255, 205);
+  p.rect(cardX, cardY, cardW, cardH, 18);
+
+  p.textAlign(p.LEFT, p.CENTER);
+
+  // Main title
+  p.fill(35, 32, 28);
+  p.textSize(17);
+  p.text('Selected tea: ' + selectedTea.name, cardX + 28, cardY + 30);
+
+  // Serving assumption
+  p.fill(85, 78, 70);
+  p.textSize(12);
+  p.text('Based on one standard cup serving.', cardX + 28, cardY + 56);
+
+  // Brew time
+  p.fill(45, 40, 35);
+  p.textSize(13);
+  p.text(
+    'Recommended brew time: ' + formatTime(selectedTea.brewSeconds),
+    cardX + 28,
+    cardY + 84
+  );
+
+  let timerText;
+
+  if (!isBrewing) {
+    timerText = 'Click the tea cup to start';
+  } else if (timeLeft > 0) {
+    timerText = 'Time left: ' + formatTime(timeLeft);
+  } else {
+    timerText = 'Extra time: +' + formatTime(Math.abs(timeLeft));
+  }
+
+  // Time left and strength are now on separate lines.
+  // This prevents the text from running outside the card.
+  p.fill(35, 32, 28);
+  p.textSize(14);
+  p.text(timerText, cardX + 28, cardY + 112);
+
+  p.fill(70, 62, 55);
+  p.textSize(13);
+  p.text(
+    'Strength: ' + strength + '   |   Status: ' + status,
+    cardX + 28,
+    cardY + 134
+  );
+}
 
   function drawTeaCup(selectedTea, brewProgress, overBrewProgress, elapsedSeconds) {
     const topY = cup.y - cup.h / 2;
@@ -303,16 +349,6 @@ registerSketch('sk2', function (p) {
     p.noStroke();
     p.fill(80, 55, 35, 40);
     p.ellipse(cup.x, bottomY + 35, 330, 42);
-
-    // Cup handle
-    p.noFill();
-    p.stroke(75, 68, 60);
-    p.strokeWeight(7);
-    p.ellipse(topRightX + 58, cup.y, 105, 135);
-
-    p.stroke(250, 246, 238);
-    p.strokeWeight(19);
-    p.ellipse(topRightX + 58, cup.y, 67, 94);
 
     // Cup glass body
     p.noStroke();
@@ -385,7 +421,7 @@ registerSketch('sk2', function (p) {
       subText = 'click cup';
     } else if (timeLeft > 0) {
       mainText = formatTime(timeLeft);
-      subText = 'left';
+      subText = 'brew left';
     } else {
       mainText = 'READY';
       subText = 'drink now';
@@ -407,28 +443,28 @@ registerSketch('sk2', function (p) {
   }
 
   function drawBrewStageMarkers(topRightX, topY, bottomY) {
-    const stages = [
-      { label: 'Ready', progress: 1 },
-      { label: 'Halfway', progress: 0.5 },
-      { label: 'Start', progress: 0 }
-    ];
+  // Move the top marker slightly lower so it does not get hidden by the rim/lid
+  const stages = [
+    { label: 'Ready', y: topY + 52 },
+    { label: 'Halfway', y: (topY + bottomY) / 2 + 5 },
+    { label: 'Start', y: bottomY - 6 }
+  ];
 
-    p.textAlign(p.LEFT, p.CENTER);
-    p.textSize(12);
+  p.textAlign(p.LEFT, p.CENTER);
+  p.textSize(12);
 
-    for (let i = 0; i < stages.length; i++) {
-      const stage = stages[i];
-      const y = p.map(stage.progress, 0, 1, bottomY, topY + 38);
+  for (let i = 0; i < stages.length; i++) {
+    const stage = stages[i];
 
-      p.stroke(80, 72, 64);
-      p.strokeWeight(1.5);
-      p.line(topRightX + 10, y, topRightX + 48, y);
+    p.stroke(70, 62, 55);
+    p.strokeWeight(1.8);
+    p.line(topRightX + 14, stage.y, topRightX + 58, stage.y);
 
-      p.noStroke();
-      p.fill(55, 50, 45);
-      p.text(stage.label, topRightX + 56, y);
-    }
+    p.noStroke();
+    p.fill(45, 40, 35);
+    p.text(stage.label, topRightX + 66, stage.y);
   }
+}
 
   function drawBubbles(liquidTopY, topY, bottomY, topLeftX, topRightX, bottomLeftX, bottomRightX) {
     const liquidHeight = bottomY - liquidTopY;
